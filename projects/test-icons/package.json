@@ -1,0 +1,11 @@
+{
+  "name": "duy-icons",
+  "version": "0.0.4",
+  "peerDependencies": {
+    "@angular/common": "^10.2.4",
+    "@angular/core": "^10.2.4"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

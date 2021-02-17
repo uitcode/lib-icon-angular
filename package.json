@@ -6,7 +6,54 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "transform-icons": "svg-to-ts --config",
+    "analyze": "ng build test-icons-showcase --prod --stats-json && webpack-bundle-analyzer ./dist/test-icons-showcase/stats.json",
+    "generate-icons": "svg-to-ts",
+    "postbuild": "cpx 'projects/test-icons/icons/**/*.{d.ts,js}' dist/test-icons"
+  },
+  "svg-to-ts": {
+    "conversionType": "files",
+    "srcFiles": [
+      "./projects/test-icons/icons/**/*.svg"
+    ],
+    "outputDirectory": "./projects/test-icons/src/lib/icons",
+    "interfaceName": "IIcon",
+    "typeName": "nameIcons",
+    "prefix": "icon",
+    "fileName": "icon.model",
+    "modelFileName": "icon.model",
+    "optimizeForLazyLoading": true,
+    "svgoConfig": {
+      "plugins": [
+        {
+          "cleanupAttrs": true
+        }
+      ]
+    },
+    "additionalModelFile": "./projects/test-icons/src/lib",
+    "compileSources": true
+  },
+  "svg-to-ts-file": {
+    "conversionType": "constants",
+    "srcFiles": [
+      "./projects/test-icons/icons/**/*.svg"
+    ],
+    "outputDirectory": "./projects/test-icons/src/lib",
+    "interfaceName": "IIcon",
+    "typeName": "nameIcons",
+    "prefix": "icon",
+    "svgoConfig": {
+      "plugins": [
+        {
+          "cleanupAttrs": true
+        }
+      ]
+    },
+    "fileName": "icons",
+    "additionalModelFile": "./projects/test-icons/src/lib",
+    "compileSources": true
   },
   "private": true,
   "dependencies": {
@@ -23,12 +70,14 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.1002.2",
     "@angular/cli": "~10.2.0",
     "@angular/compiler-cli": "~10.2.0",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "cpx-fixed": "^1.6.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",
@@ -36,9 +85,12 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "ng-packagr": "^10.1.0",
     "protractor": "~7.0.0",
+    "svg-to-ts": "^6.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "typescript": "~4.0.2",
+    "webpack-bundle-analyzer": "^4.4.0"
   }
 }
